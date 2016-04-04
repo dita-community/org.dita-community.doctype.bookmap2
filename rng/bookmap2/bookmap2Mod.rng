@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="urn:oasis:names:tc:dita:rng:vocabularyModuleDesc.rng"
+                         schematypens="http://relaxng.org/ns/structure/1.0"?>
+<grammar xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns:dita="http://dita.oasis-open.org/architecture/2005/" xmlns="http://relaxng.org/ns/structure/1.0"
+  datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <moduleDesc xmlns="http://dita.oasis-open.org/architecture/2005/">
+    <moduleTitle>DITA Bookmap</moduleTitle>
+    <headerComment>
+=============================================================
+=============================================================
+</headerComment>
+    <moduleMetadata>
+      <moduleType>map</moduleType>
+      <moduleShortName>bookmap</moduleShortName>
+      <modulePublicIds>
+        <dtdMod>urn:oasis:names:tc:dita:modules:bookmap2dtd</dtdMod>
+        <dtdEnt>urn:oasis:names:tc:dita:entities:bookmap2dtd</dtdEnt>
+        <xsdGrp>urn:oasis:names:tc:dita:xsd:bookmap2Grp.xsd</xsdGrp>
+        <xsdMod>urn:oasis:names:tc:dita:xsd:bookmap2Mod.xsd</xsdMod>
+        <rncMod>urn:oasis:names:tc:dita:rnc:bookmap2Mod.rnc</rncMod>
+        <rngMod>urn:oasis:names:tc:dita:rng:bookmap2Mod.rng</rngMod>
+      </modulePublicIds>
+      <domainsContribution>(map bookmap2)</domainsContribution>
+    </moduleMetadata>
+  </moduleDesc>
+  <div>
+    <a:documentation>ELEMENT TYPE NAME PATTERNS</a:documentation>
+    <define name="bookmap2">
+      <ref name="bookmap2.element"/>
+    </define>
+    <define name="book">
+      <ref name="book.element"/>
+    </define>
+    <define name="book-body">
+      <ref name="book-body.element"/>
+    </define>
+    <define name="resources">
+      <ref name="resources.element"/>
+    </define>
+    
+  </div>
+  <div>
+    <a:documentation>COMMON ATTRIBUTE SETS</a:documentation>
+  </div>
+  <div>
+    <a:documentation>ELEMENT TYPE PATTERNS</a:documentation>
+
+    <div>
+      <a:documentation>LONG NAME: Book Map 2</a:documentation>
+      <define name="bookmap2.content">
+        <optional>
+          <choice>
+            <ref name="title"/>
+            <ref name="booktitle"/>
+          </choice>
+        </optional>
+        <optional>
+          <choice>
+            <ref name="bookmeta"/>
+            <ref name="topicmeta"/>
+          </choice>
+        </optional>
+        <optional>
+          <ref name="resources"/>
+        </optional>
+        <zeroOrMore>
+          <ref name="topicgroup"/>
+        </zeroOrMore>
+        <oneOrMore>
+          <a:documentation>When there are multiple book elements, each should be conditional
+          to a distinct set of conditions.</a:documentation>
+          <ref name="book"/>          
+        </oneOrMore>
+        <zeroOrMore>
+          <ref name="topicgroup"/>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="reltable"/>
+        </zeroOrMore>
+      </define>
+      <define name="bookmap2.attributes">
+        <optional>
+          <attribute name="id">
+            <data type="ID"/>
+          </attribute>
+        </optional>
+        <ref name="conref-atts"/>
+        <optional>
+          <attribute name="anchorref"/>
+        </optional>
+        <optional>
+          <attribute name="outputclass"/>
+        </optional>
+        <ref name="localization-atts"/>
+        <ref name="topicref-atts"/>
+        <ref name="select-atts"/>
+      </define>
+      <define name="bookmap2.element">
+        <element name="bookmap2" dita:longName="Book Map 2">
+          <a:documentation>The &lt;bookmap2> element is a map file used to organize DITA content into a traditional book format.</a:documentation>
+          <ref name="bookmap2.attlist"/>
+          <ref name="bookmap2.content"/>
+        </element>
+      </define>
+      <define name="bookmap2.attlist" combine="interleave">
+        <ref name="bookmap2.attributes"/>
+        <ref name="arch-atts"/>
+        <ref name="domains-att"/>
+      </define>
+    </div>
+    <div>
+      <a:documentation>LONG NAME: Book </a:documentation>
+      <define name="book.content">
+        <optional>
+          <ref name="topicmeta"/>
+        </optional>
+        <zeroOrMore>
+          <ref name="ditavalref"/>
+        </zeroOrMore>
+        <ref name="book-components"/>
+      </define>
+      <define name="book.attributes">
+        <optional>
+          <attribute name="outputclass"/>
+        </optional>
+        <ref name="univ-atts"/>
+      </define>
+      <define name="book.element">
+        <element name="book" dita:longName="Book Content">
+          <a:documentation>The &lt;book> element organizes the content of the book. If there are 
+          multiple book elements in a single bookmap then each book should be conditional to
+          a distinct set of conditions. The intent is that a single book map has a single effective
+          book for a given set of runtime filtering conditions. However, there may be publications
+          for which is makes sense to have multiple books associated with a single set of
+          book-level metadata. This design allows for that case.</a:documentation>
+          <ref name="book.attlist"/>
+          <ref name="book.content"/>
+        </element>
+      </define>
+      <define name="book.attlist" combine="interleave">
+        <ref name="book.attributes"/>
+      </define>
+    </div>    
+    <div>
+      <a:documentation>LONG NAME: Book Body </a:documentation>
+      <define name="book-body.content">
+        <optional>
+          <ref name="topicmeta"/>
+        </optional>
+        <zeroOrMore>
+          <choice>
+            <ref name="part"/>
+            <ref name="chapter"/>
+            <ref name="topicref">
+              <a:documentation>This topicref is intended primarily as an extension point for
+                domain integration or for specialization. Authors should normally not use
+                unspecialized topicrefs at this point.</a:documentation>
+            </ref>
+          </choice>
+        </zeroOrMore>
+      </define>
+      <define name="book-body.attributes">
+        <optional>
+          <attribute name="outputclass"/>
+        </optional>
+        <ref name="univ-atts"/>
+      </define>
+      <define name="book-body.element">
+        <element name="book-body" dita:longName="Book Body">
+          <a:documentation>The &lt;book-body> element contains references to topics that serve
+          as the main body of a book, that is, between any frontmatter and any appendicces
+          or backmatter, e.g., parts, chapters, etc.</a:documentation>
+          <ref name="book-body.attlist"/>
+          <ref name="book-body.content"/>
+        </element>
+      </define>
+      <define name="book-body.attlist" combine="interleave">
+        <ref name="book-body.attributes"/>
+      </define>
+    </div>    
+    <div>
+      <a:documentation>LONG NAME: Resources </a:documentation>
+      <define name="resources.content">
+        <optional>
+          <ref name="topicmeta"/>
+        </optional>
+        <zeroOrMore>
+          <choice>
+            <ref name="topicref"/>            
+          </choice>
+        </zeroOrMore>
+      </define>
+      <define name="resources.attributes">
+        <optional>
+          <attribute name="outputclass"/>
+        </optional>
+        <ref name="univ-atts"/>
+      </define>
+      <define name="resources.element">
+        <element name="resources" dita:longName="Resources">
+          <a:documentation>The &lt;resources> element is intended to contain key definitions
+            for resources including topics, images, media objects, and external resources
+            like Web sites.
+          </a:documentation>
+          <ref name="resources.attlist"/>
+          <ref name="resources.content"/>
+        </element>
+      </define>
+      <define name="resources.attlist" combine="interleave">
+        <ref name="resources.attributes"/>
+      </define>
+    </div>
+    <div>
+      <define name="book-components">
+        <a:documentation>The components that make up the main flow of the book.</a:documentation>
+        <optional>
+          <ref name="frontmatter"/>
+        </optional>
+        <ref name="book-body"/>
+        <optional>
+          <ref name="appendices"/>
+        </optional>
+        <optional>
+          <ref name="backmatter"/>
+        </optional>
+      </define>
+    </div>
+  </div>
+  <div>
+    <a:documentation>SPECIALIZATION ATTRIBUTES</a:documentation>
+
+    <define name="bookmap2.attlist" combine="interleave">
+      <ref name="global-atts"/>
+      <optional>
+        <attribute name="class" a:defaultValue="- map/map bookmap2/bookmap2 "/>
+      </optional>
+    </define>
+    <define name="book.attlist" combine="interleave">
+      <ref name="global-atts"/>
+      <optional>
+        <attribute name="class" a:defaultValue="- map/topicref mapgroup/topicgroup bookmap2/book "/>
+      </optional>
+    </define>
+    <define name="book-body.attlist" combine="interleave">
+      <ref name="global-atts"/>
+      <optional>
+        <attribute name="class" a:defaultValue="- map/topicref mapgroup/topicgroup bookmap2/book-body "/>
+      </optional>
+    </define>
+    <define name="resources.attlist" combine="interleave">
+      <ref name="global-atts"/>
+      <optional>
+        <attribute name="class" a:defaultValue="- map/topicref mapgroup/topicgroup bookmap2/resources "/>
+      </optional>
+    </define>
+  </div>
+</grammar>

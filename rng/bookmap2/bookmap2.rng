@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="urn:oasis:names:tc:dita:rng:checkShell.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="urn:oasis:names:tc:dita:rng:vocabularyModuleDesc.rng"
+                         schematypens="http://relaxng.org/ns/structure/1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:dita="http://dita.oasis-open.org/architecture/2005/"
+         xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+  <moduleDesc xmlns="http://dita.oasis-open.org/architecture/2005/">
+      <moduleTitle>DITA Book Map 2 Shell</moduleTitle>
+      <headerComment xml:space="preserve">
+=============================================================
+BookMap 2 Map Type
+
+DITA Community
+
+Provides a new design for the original BookMap map type
+by using the original BookMap type as though it was a 
+domain, a new specialization feature in DITA 1.3.
+
+Author: W. Eliot Kimber, ekimber@contrext.com
+
+
+=============================================================
+</headerComment>
+      <moduleMetadata>
+         <moduleType>mapshell</moduleType>
+         <moduleShortName>bookmap2</moduleShortName>
+         <shellPublicIds>
+            <dtdShell>urn:pubid:dita-community.org:doctypes:bookmap2:dtd:bookmap2.dtd</dtdShell>
+           <rncShell>urn:pubid:dita-community.org:doctypes:bookmap2:rnc:bookmap2.rnc</rncShell>
+           <rngShell>urn:pubid:dita-community.org:doctypes:bookmap2:rng:bookmap2.rng</rngShell>
+           <xsdShell>urn:pubid:dita-community.org:doctypes:bookmap2:xsd:bookmap2.xsd</xsdShell>
+         </shellPublicIds>
+      </moduleMetadata>
+  </moduleDesc>
+
+  <div>
+      <a:documentation>ROOT ELEMENT DECLARATION</a:documentation>
+      <start>
+         <ref name="bookmap2.element"/>
+      </start>
+  </div>
+  <div>
+      <a:documentation>DOMAINS ATTRIBUTE</a:documentation>
+      <define name="domains-att" combine="interleave">
+         <optional>
+            <attribute name="domains"
+              a:defaultValue="(map bookmap2)
+                         (map bookmap)
+                         (topic abbrev-d)
+                         (topic delay-d)
+                         (map ditavalref-d)
+                         (topic hazard-d)
+                         (topic hi-d)
+                         (topic indexing-d)
+                         (map mapgroup-d)
+                         (topic markup-d xml-d)
+                         (topic markup-d)
+                         (topic pr-d)
+                         (topic relmgmt-d)
+                         (topic sw-d)
+                         (topic ui-d)
+                         (topic ut-d)
+                         (topic xnal-d)
+                         a(props deliveryTarget)"/>
+         </optional>
+      </define>
+
+  </div>
+  <div>
+    <a:documentation>MODULE INCLUSIONS</a:documentation>
+    <include href="urn:oasis:names:tc:dita:rng:mapMod.rng"/>
+    <include href="urn:oasis:names:tc:dita:rng:mapGroupMod.rng"/>
+
+    <include href="bookmap2Mod.rng"/>
+
+    <include href="urn:oasis:names:tc:dita:rng:bookmapMod.rng"/>
+    <include href="urn:oasis:names:tc:dita:rng:abbreviateDomain.rng"/>
+    <include href="urn:oasis:names:tc:dita:rng:delayResolutionDomain.rng"/>
+    <include href="urn:oasis:names:tc:dita:rng:deliveryTargetAttDomain.rng"/>
+    <include href="urn:oasis:names:tc:dita:rng:ditavalrefDomain.rng" dita:since="1.3"/>
+    <include href="urn:oasis:names:tc:dita:rng:hazardDomain.rng"/>
+    <include href="urn:oasis:names:tc:dita:rng:highlightDomain.rng"/>
+    <include href="urn:oasis:names:tc:dita:rng:indexingDomain.rng"/>
+    <include href="urn:oasis:names:tc:dita:rng:markupDomain.rng" dita:since="1.3"/>
+    <include href="urn:oasis:names:tc:dita:rng:programmingDomain.rng"/>
+    <include href="urn:oasis:names:tc:dita:rng:releaseManagementDomain.rng" dita:since="1.3"/>
+    <include href="urn:oasis:names:tc:dita:rng:softwareDomain.rng"/>
+    <include href="urn:oasis:names:tc:dita:rng:uiDomain.rng"/>
+    <include href="urn:oasis:names:tc:dita:rng:utilitiesDomain.rng"/>
+    <include href="urn:oasis:names:tc:dita:rng:xnalDomain.rng"/>
+    <include href="urn:oasis:names:tc:dita:rng:xmlDomain.rng" dita:since="1.3"/>
+  </div>
+  <div>
+      <a:documentation>ID-DEFINING-ELEMENT OVERRIDES</a:documentation>
+      <define name="any">
+         <zeroOrMore>
+            <choice>
+               <ref name="idElements"/>
+               <element>
+                  <anyName>
+                     <except>
+                        <name>map</name>
+                        <name>bookmap</name>
+                       <name>bookmap2</name>
+                       <name>anchor</name>
+                     </except>
+                  </anyName>
+                  <zeroOrMore>
+                     <attribute>
+                        <anyName/>
+                     </attribute>
+                  </zeroOrMore>
+                  <ref name="any"/>
+               </element>
+               <text/>
+            </choice>
+         </zeroOrMore>
+      </define>
+  </div>
+</grammar>

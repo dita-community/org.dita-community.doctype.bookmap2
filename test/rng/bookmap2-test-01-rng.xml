@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../rng/bookmap2/bookmap2.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<bookmap2>
+  <booktitle>
+    <booklibrary></booklibrary>
+    <mainbooktitle></mainbooktitle>
+    <booktitlealt></booktitlealt>
+  </booktitle>
+  <bookmeta>
+    <data></data>
+  </bookmeta>
+  <resources>
+    <keydef keys="foo">
+      <topicmeta>
+        <keywords>
+          <keyword>Foo</keyword>
+        </keywords>
+      </topicmeta>
+    </keydef>
+  </resources>
+  <book>
+    <ditavalref></ditavalref>
+    <book-body>     
+      <chapter>        
+      </chapter>
+      <part></part>       
+    </book-body>
+    <appendices>
+      <appendix>
+        <ditavalref></ditavalref>
+      </appendix>
+    </appendices>
+    <backmatter>
+      <booklists>        
+      </booklists>
+    </backmatter>
+  </book>
+</bookmap2>
